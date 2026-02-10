@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 29 Tuesday & Wednesday Practice Quiz</title>
+    <style>
+        /* --- CSS Variables & Themes --- */
+        :root {
+            /* Base Transition */
+            --transition-speed: 0.3s;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* 1. Modern Dark (Default) */
+        [data-theme="dark"] {
+            --bg-body: #1e293b;
+            --bg-card: #334155;
+            --bg-header: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-accent: #38bdf8;
+            --border-color: #475569;
+            --highlight-bg: #475569;
+            --button-bg: #38bdf8;
+            --button-text: #0f172a;
+            --button-hover: #0ea5e9;
+            --feedback-success-bg: #064e3b;
+            --feedback-success-border: #059669;
+            --feedback-success-text: #a7f3d0;
+            --feedback-error-bg: #7f1d1d;
+            --feedback-error-border: #dc2626;
+            --feedback-error-text: #fecaca;
+        }
+
+        /* 2. Modern Light */
+        [data-theme="light"] {
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --text-accent: #2563eb;
+            --border-color: #e5e7eb;
+            --highlight-bg: #f3f4f6;
+            --button-bg: #2563eb;
+            --button-text: #ffffff;
+            --button-hover: #1d4ed8;
+            --feedback-success-bg: #ecfdf5;
+            --feedback-success-border: #34d399;
+            --feedback-success-text: #065f46;
+            --feedback-error-bg: #fef2f2;
+            --feedback-error-border: #f87171;
+            --feedback-error-text: #991b1b;
+        }
+
+        /* 3. Midnight (Pure Black) */
+        [data-theme="midnight"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --text-accent: #90caf9;
+            --border-color: #333333;
+            --highlight-bg: #1a1a1a;
+            --button-bg: #90caf9;
+            --button-text: #000000;
+            --button-hover: #42a5f5;
+            --feedback-success-bg: #051b11;
+            --feedback-success-border: #0f5132;
+            --feedback-success-text: #75b798;
+            --feedback-error-bg: #2c0b0e;
+            --feedback-error-border: #842029;
+            --feedback-error-text: #ea868f;
+        }
+
+        /* 4. Legacy Dark (Original) */
+        [data-theme="legacy-dark"] {
+            --bg-body: #2d343e;
+            --bg-card: #3c424f;
+            --bg-header: #3c424f;
+            --text-main: #e8e6e3;
+            --text-muted: #b0c4de;
+            --text-accent: #8ab4f8;
+            --border-color: #555;
+            --highlight-bg: #454c5a;
+            --button-bg: #8ab4f8;
+            --button-text: #202124;
+            --button-hover: #a3c5f9;
+            --feedback-success-bg: #344e41;
+            --feedback-success-border: #52b788;
+            --feedback-success-text: #c7f9cc;
+            --feedback-error-bg: #5e2129;
+            --feedback-error-border: #a4133c;
+            --feedback-error-text: #f8d7da;
+        }
+
+        /* 5. Sepia (Reading Mode) */
+        [data-theme="sepia"] {
+            --bg-body: #f4ecd8;
+            --bg-card: #fdf6e3;
+            --bg-header: #e4d5b7;
+            --text-main: #433422;
+            --text-muted: #7c6f5a;
+            --text-accent: #a05a2c;
+            --border-color: #d3c4a5;
+            --highlight-bg: #ebe1c9;
+            --button-bg: #a05a2c;
+            --button-text: #fdf6e3;
+            --button-hover: #864822;
+            --feedback-success-bg: #e6f4ea;
+            --feedback-success-border: #8ab893;
+            --feedback-success-text: #2e4c35;
+            --feedback-error-bg: #f9e3e3;
+            --feedback-error-border: #d48f8f;
+            --feedback-error-text: #5c2b2b;
+        }
+
+        /* 6. High Contrast */
+        [data-theme="contrast"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #ffffff;
+            --text-muted: #dddddd;
+            --text-accent: #ffff00;
+            --border-color: #ffffff;
+            --highlight-bg: #333333;
+            --button-bg: #ffff00;
+            --button-text: #000000;
+            --button-hover: #e6e600;
+            --feedback-success-bg: #000000;
+            --feedback-success-border: #00ff00;
+            --feedback-success-text: #00ff00;
+            --feedback-error-bg: #000000;
+            --feedback-error-border: #ff0000;
+            --feedback-error-text: #ff0000;
+        }
+
+        /* --- Global Reset & Layout --- */
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-main);
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            line-height: 1.6;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Default to Sticky */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Class to remove sticky behavior */
+        header.unpinned {
+            position: relative;
+            box-shadow: none;
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            margin: 0;
+            color: var(--text-accent);
+        }
+
+        .controls-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pin-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .pin-btn:hover {
+            background-color: var(--highlight-bg);
+        }
+
+        .pin-btn.pin-active {
+            color: var(--text-accent);
+            border-color: var(--text-accent);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        select#theme-select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* --- Main Content --- */
+        .container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 1rem 4rem 1rem;
+        }
+
+        .section-header {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--text-accent);
+            color: var(--text-accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* --- Question Card --- */
+        .question-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .lo-box {
+            background-color: var(--highlight-bg);
+            border-left: 4px solid var(--text-accent);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Options --- */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: var(--highlight-bg);
+            border-color: var(--text-muted);
+        }
+
+        .option-label input {
+            margin-top: 0.3rem;
+            margin-right: 1rem;
+            accent-color: var(--text-accent);
+            transform: scale(1.2);
+        }
+
+        /* --- Buttons --- */
+        .btn-check {
+            margin-top: 1.5rem;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-check:hover {
+            opacity: 0.9;
+        }
+
+        /* --- Feedback Area --- */
+        .feedback {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+            border: 1px solid transparent;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background-color: var(--feedback-success-bg);
+            border-color: var(--feedback-success-border);
+            color: var(--feedback-success-text);
+        }
+
+        .feedback.incorrect {
+            background-color: var(--feedback-error-bg);
+            border-color: var(--feedback-error-border);
+            color: var(--feedback-error-text);
+        }
+
+        .feedback-header {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .rationale {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .source {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-style: italic;
+            border-top: 1px dashed currentColor;
+            padding-top: 0.5rem;
+        }
+
+        /* --- Mobile Tweaks --- */
+        @media (max-width: 600px) {
+            header { padding: 1rem; flex-direction: column; gap: 10px; align-items: flex-start; }
+            .controls-wrapper { width: 100%; justify-content: space-between; }
+            .question-card { padding: 1.5rem; }
+            header h1 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <h1>Week 29 Tuesday & Wednesday Practice Quiz</h1>
+        <div class="controls-wrapper">
+            <!-- Pin Button -->
+            <button class="pin-btn pin-active" id="pin-btn" onclick="toggleHeader()" title="Pin/Unpin Header">
+                📍
+            </button>
+            
+            <div class="theme-control">
+                <label for="theme-select">Theme:</label>
+                <select id="theme-select" onchange="changeTheme(this.value)">
+                    <option value="dark">Modern Dark</option>
+                    <option value="midnight">Midnight</option>
+                    <option value="light">Modern Light</option>
+                    <option value="legacy-dark">Legacy Dark</option>
+                    <option value="sepia">Sepia</option>
+                    <option value="contrast">High Contrast</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" id="quiz-root">
+        <!-- Content injected via JS -->
+    </div>
+
+    <script>
+        // --- Data ---
+        const quizData = [
+            // --- Section 1: Diagnostic Criteria for Heart Failure / CHF Treatment I and II ---
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO1: Understand definition of Heart Failure and difference between [HF types].",
+                fullLO: "LO1: Understand definition of Heart Failure and difference between systolic & diastolic HF (HFrEF vs HFpEF)",
+                question: "A 65-year-old male presents with dyspnea on exertion. Echocardiography reveals a left ventricular ejection fraction (LVEF) of 35%. According to the universal definition and classification of heart failure, this patient's condition is best classified as:",
+                options: {
+                    A: "Heart Failure with improved EF (HFimpEF)",
+                    B: "Heart Failure with mildly reduced EF (HFmrEF)",
+                    C: "Heart Failure with preserved EF (HFpEF)",
+                    D: "Heart Failure with reduced EF (HFrEF)",
+                    E: "Pre-Heart Failure (Stage B)"
+                },
+                correctAnswer: "D",
+                rationale: "Heart failure with reduced ejection fraction (HFrEF) is defined as heart failure with an LVEF ≤ 40%.",
+                source: "Thornton, Heart_Failure.pdf, Slide 4 & 6; Winston, Heart_Failure_Medications.pdf, Slide 2: \"HF with reduced EF (HFrEF): HF with LVEF < 40%\""
+            },
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO1: Understand definition of Heart Failure and difference between [HF types].",
+                fullLO: "LO1: Understand definition of Heart Failure and difference between systolic & diastolic HF (HFrEF vs HFpEF)",
+                question: "A 72-year-old female presents with signs of heart failure, including elevated natriuretic peptide levels and structural heart disease. Her left ventricular ejection fraction is 55%. Which of the following terms best describes her condition?",
+                options: {
+                    A: "Heart Failure with improved EF",
+                    B: "Heart Failure with mildly reduced EF",
+                    C: "Heart Failure with preserved EF",
+                    D: "Heart Failure with reduced EF",
+                    E: "High output heart failure"
+                },
+                correctAnswer: "C",
+                rationale: "Heart failure with preserved ejection fraction (HFpEF) is defined as heart failure with an LVEF ≥ 50%.",
+                source: "Thornton, Heart_Failure.pdf, Slide 4; Winston, Heart_Failure_Medications.pdf, Slide 2: \"HF with preserved EF (HFpEF): HF with LVEF ≥ 50%\""
+            },
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO2: Recognize symptoms and signs of heart failure including [specific findings].",
+                fullLO: "LO2: Recognize symptoms and signs of heart failure including common complaints, physical findings, xray and sonographic findings",
+                question: "A 70-year-old male presents with shortness of breath. A chest X-ray is obtained. Which of the following radiographic findings is most consistent with a diagnosis of pulmonary edema associated with heart failure?",
+                options: {
+                    A: "Deepening of the costophrenic angles",
+                    B: "Flattening of the diaphragm",
+                    C: "Horizontal lines in the periphery of the lungs (Kerley B lines)",
+                    D: "Hyperinflation of the lung fields",
+                    E: "Mediastinal widening"
+                },
+                correctAnswer: "C",
+                rationale: "Interstitial edema on chest X-ray presents as horizontal lines in the periphery of the lungs, known as Kerley B lines. Other findings include cephalization of vessels and alveolar edema (fluffy perihilar infiltrates).",
+                source: "Thornton, Heart_Failure.pdf, Slide 23 & 24: \"Interstitial edema (horizontal lines in periphery of lungs called kerley B lines)\""
+            },
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO2: Recognize symptoms and signs of heart failure including [specific findings].",
+                fullLO: "LO2: Recognize symptoms and signs of heart failure including common complaints, physical findings, xray and sonographic findings",
+                question: "A patient presents with dyspnea. Physical examination reveals distention of the jugular veins. According to the Framingham Criteria for Heart Failure, jugular vein distention is classified as:",
+                options: {
+                    A: "A minor criterion",
+                    B: "A major criterion",
+                    C: "An exclusion criterion",
+                    D: "A sign of cor pulmonale only",
+                    E: "Non-diagnostic"
+                },
+                correctAnswer: "B",
+                rationale: "Jugular vein distention is listed as a Major Criterion in the Framingham Criteria for Heart Failure.",
+                source: "Thornton, Heart_Failure.pdf, Slide 16: \"Major Criteria... Jugular vein distention\""
+            },
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO3: Know underlying clinical causes along with mechanisms for heart failure",
+                fullLO: "LO3: Know underlying clinical causes along with mechanisms for heart failure",
+                question: "Which of the following conditions is considered a high-output cause of heart failure?",
+                options: {
+                    A: "Aortic stenosis",
+                    B: "Chronic hypertension",
+                    C: "Myocardial infarction",
+                    D: "Thyrotoxicosis",
+                    E: "Viral cardiomyopathy"
+                },
+                correctAnswer: "D",
+                rationale: "High output failure can be caused by Thyrotoxicosis, Paget’s disease, Anemia, Pregnancy, and A-V fistula.",
+                source: "Thornton, Heart_Failure.pdf, Slide 5: \"High output failure-Thyrotoxicosis, Paget's disease, Anemia, Pregnancy, A-V fistula\""
+            },
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO3: Know underlying clinical causes along with mechanisms for heart failure",
+                fullLO: "LO3: Know underlying clinical causes along with mechanisms for heart failure",
+                question: "Therapeutic strategies in heart failure aim to block negative cardiac remodeling. Which of the following pathophysiologic processes contributes directly to harmful remodeling?",
+                options: {
+                    A: "Decreased sympathetic nervous system activity",
+                    B: "Downregulation of the renin-angiotensin-aldosterone system",
+                    C: "Hyperactivation of signaling pathways by catecholamines and angiotensin II",
+                    D: "Increased vagal tone",
+                    E: "Upregulation of natriuretic peptides"
+                },
+                correctAnswer: "C",
+                rationale: "The pathophysiology of negative cardiac remodeling involves the hyperactivation of damaging signaling pathways by catecholamines, angiotensin II, and aldosterone.",
+                source: "Winston, Heart_Failure_Medications.pdf, Slide 3: \"Pathophysiology: Hyperactivation of damaging signaling pathways by catecholamines, angiotensin II, aldosterone\""
+            },
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO4: Treatment strategies for improvement of survival &/or quality of life",
+                fullLO: "LO4: Treatment strategies for improvement of survival &/or quality of life",
+                question: "A patient with chronic systolic heart failure asks which of his medications helps him live longer. Which of the following drug classes has been shown to provide a survival benefit in heart failure with reduced ejection fraction (HFrEF)?",
+                options: {
+                    A: "Calcium channel blockers",
+                    B: "Digoxin",
+                    C: "Diuretics",
+                    D: "Mineralocorticoid Receptor Antagonists (Spironolactone)",
+                    E: "Nitrates (monotherapy)"
+                },
+                correctAnswer: "D",
+                rationale: "Medications with survival benefit include ACE-I, Beta blockers, Hydralazine/Isosorbide, Spironolactone, and ARBs. Diuretics and Digoxin are for symptom relief.",
+                source: "Thornton, Heart_Failure.pdf, Slide 32: \"Survival benefit: ... Spironolactone... Symptom relief: Diuretics, Digoxin\""
+            },
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO4: Treatment strategies for improvement of survival &/or quality of life",
+                fullLO: "LO4: Treatment strategies for improvement of survival &/or quality of life",
+                question: "A patient with HFrEF is currently taking an ACE inhibitor and a beta-blocker. To further reduce mortality and hospitalization risk, the physician considers adding a medication from the SGLT2 inhibitor class. Which of the following is an SGLT2 inhibitor approved for this indication?",
+                options: {
+                    A: "Dapagliflozin",
+                    B: "Furosemide",
+                    C: "Lisinopril",
+                    D: "Metoprolol",
+                    E: "Valsartan"
+                },
+                correctAnswer: "A",
+                rationale: "The \"Quad-4\" therapy for HFrEF includes SGLT2 inhibitors such as Dapagliflozin, Empagliflozin, and Sotagliflozin.",
+                source: "Winston, Heart_Failure_Medications.pdf, Slide 4: \"SGLT2 Inhibitors: Dapagliflozin, Empagliflozin, Sotagliflozin\""
+            },
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO5: Approach to identifying and treatment for acute heart failure",
+                fullLO: "LO5: Approach to identifying and treatment for acute heart failure",
+                question: "A patient presents to the emergency department with acute decompensated heart failure. The patient is assessed as \"Wet and Warm\" (Congestion present, Perfusion adequate). What is the primary therapeutic intervention indicated for this hemodynamic profile?",
+                options: {
+                    A: "Inotropes",
+                    B: "IV Diuretics",
+                    C: "IV Fluids",
+                    D: "Vasopressors",
+                    E: "Ventilatory support"
+                },
+                correctAnswer: "B",
+                rationale: "For a patient who is \"Warm and wet\" (PCWP elevated, CI normal), the treatment is diuretics (e.g., furosemide, bumetanide).",
+                source: "Thornton, Heart_Failure.pdf, Slide 26: \"Warm and wet... Diuretic: furosemide, bumetanide\""
+            },
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO5: Approach to identifying and treatment for acute heart failure",
+                fullLO: "LO5: Approach to identifying and treatment for acute heart failure",
+                question: "In the management of acute pulmonary edema, the 2021 ESC Guidelines recommend evaluating systolic blood pressure. If the patient has a systolic blood pressure ≥ 110 mmHg, which of the following drug classes is recommended in addition to loop diuretics?",
+                options: {
+                    A: "Beta-blockers",
+                    B: "Calcium channel blockers",
+                    C: "Inotropes",
+                    D: "Vasodilators",
+                    E: "Vasopressors"
+                },
+                correctAnswer: "D",
+                rationale: "The algorithm for pulmonary edema shows that if systolic BP is ≥ 110 mmHg, loop diuretics and vasodilators (Class IIb) are indicated.",
+                source: "Thornton, Heart_Failure.pdf, Slide 28: \"Systolic blood pressure ≥ 110 mmHg -> Yes -> Loop diuretics... and/or vasodilators\""
+            },
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO6: List the drugs of choice for treating the [major types of HF].",
+                fullLO: "LO6: List the drugs of choice for treating the major types of heart failure",
+                question: "Current guidelines recommend four foundational drug classes (\"The Quad-4\") for the treatment of HFrEF. In addition to a Beta-Blocker, MRA, and SGLT2 inhibitor, which of the following is the preferred agent for RAAS inhibition?",
+                options: {
+                    A: "ACE Inhibitor",
+                    B: "ARB",
+                    C: "ARNI (Angiotensin Receptor-Neprilysin Inhibitor)",
+                    D: "Direct Renin Inhibitor",
+                    E: "Loop Diuretic"
+                },
+                correctAnswer: "C",
+                rationale: "The guidelines recommend RAAS inhibition, noting that ARNI is superior to ACEI/ARB for HFrEF.",
+                source: "Winston, Heart_Failure_Medications.pdf, Slide 8 & 4: \"ARNI superior to ACEI/ARB for HFrEF\" & \"RAAS Inhibition: ACE inhibitors, ARBs, or ARNIs\""
+            },
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO6: List the drugs of choice for treating the [major types of HF].",
+                fullLO: "LO6: List the drugs of choice for treating the major types of heart failure",
+                question: "Which drug class is the only one with strong outcome benefits, especially reduced hospitalizations, for patients with Heart Failure with preserved Ejection Fraction (HFpEF)?",
+                options: {
+                    A: "ACE Inhibitors",
+                    B: "Beta-Blockers",
+                    C: "Mineralocorticoid Receptor Antagonists",
+                    D: "SGLT2 Inhibitors",
+                    E: "Thiazide Diuretics"
+                },
+                correctAnswer: "D",
+                rationale: "SGLT2 inhibitors are the only class with strong outcome benefits in HFpEF. Other classes have limited options.",
+                source: "Winston, Heart_Failure_Medications.pdf, Slide 15: \"HFpEF: Limited options - SGLT2 inhibitors are the only class with strong outcome benefits... in HFpEF.\""
+            },
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO7: Apply combination therapies based on the mechanisms of action, side effects and benefits of heart failure drugs",
+                fullLO: "LO7: Apply combination therapies based on the mechanisms of action, side effects and benefits of heart failure drugs",
+                question: "A 55-year-old African American male with systolic heart failure remains symptomatic despite optimal therapy with an ACE inhibitor and Beta-blocker. According to the A-HEFT study, which combination therapy should be added to improve survival in this patient?",
+                options: {
+                    A: "Amlodipine and Atorvastatin",
+                    B: "Digoxin and Warfarin",
+                    C: "Hydralazine and Isosorbide Dinitrate",
+                    D: "Losartan and Hydrochlorothiazide",
+                    E: "Spironolactone and Eplerenone"
+                },
+                correctAnswer: "C",
+                rationale: "The A-HEFT study showed that BiDil (hydralazine + isosorbide dinitrate) has survival benefit in African-Americans with systolic heart failure when added to a standard regimen.",
+                source: "Thornton, Heart_Failure.pdf, Slide 41: \"A-HEFT Study... Bidil (combination of hydralazine... and isosorbide dinitrate...) has been shown to have survival benefit in African-Americans\""
+            },
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO7: Apply combination therapies based on the mechanisms of action, side effects and benefits of heart failure drugs",
+                fullLO: "LO7: Apply combination therapies based on the mechanisms of action, side effects and benefits of heart failure drugs",
+                question: "A patient with HFrEF is prescribed Entresto (Sacubitril/Valsartan). To avoid the risk of angioedema, this medication must not be administered within 36 hours of taking which other class of medication?",
+                options: {
+                    A: "ACE Inhibitors",
+                    B: "Beta-Blockers",
+                    C: "Calcium Channel Blockers",
+                    D: "Loop Diuretics",
+                    E: "SGLT2 Inhibitors"
+                },
+                correctAnswer: "A",
+                rationale: "Entresto (ARNI) has a contraindication: Do not use within 36 hours of ACEI due to angioedema risk.",
+                source: "Winston, Heart_Failure_Medications.pdf, Slide 8: \"Contraindication: Do not use within 36 hours of ACEI\""
+            },
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO8: Describe how heart failure drugs are metabolized and eliminated from the body",
+                fullLO: "LO8: Describe how heart failure drugs are metabolized and eliminated from the body",
+                question: "A patient with heart failure and chronic kidney disease is being managed pharmacologically. Which of the following heart failure medications is primarily eliminated by the kidneys and requires dose adjustment or caution in renal dysfunction because it has a narrow therapeutic window and a long half-life?",
+                options: {
+                    A: "Carvedilol",
+                    B: "Digoxin",
+                    C: "Isosorbide dinitrate",
+                    D: "Metoprolol",
+                    E: "Sacubitril"
+                },
+                correctAnswer: "B",
+                rationale: "Digoxin is renally eliminated and has a long half-life (~1 week to steady state). It has a narrow therapeutic window.",
+                source: "Winston, Heart_Failure_Medications.pdf, Slide 13: \"Digoxin... Warning: Renal elimination, long half-life\""
+            },
+            {
+                section: "Diagnostic Criteria for Heart Failure / CHF Treatment I and II",
+                maskedLO: "LO8: Describe how heart failure drugs are metabolized and eliminated from the body",
+                fullLO: "LO8: Describe how heart failure drugs are metabolized and eliminated from the body",
+                question: "A patient is started on Dapagliflozin (an SGLT2 inhibitor). Due to its mechanism of action in the proximal tubule, which organ function must be monitored, and serves as a relative contraindication for initiation if severely impaired (eGFR < 20)?",
+                options: {
+                    A: "Bone marrow function",
+                    B: "Hepatic function",
+                    C: "Pancreatic function",
+                    D: "Renal function",
+                    E: "Thyroid function"
+                },
+                correctAnswer: "D",
+                rationale: "SGLT2 inhibitors act in the proximal tubule. Renal function must be monitored. Initiation is generally contraindicated at eGFR < 20 mL/min/1.73m².",
+                source: "Winston, Heart_Failure_Medications.pdf, Slide 11: \"SGLT2 Inhibitors... Monitor renal function... Contraindicated: Generally not initiated at eGFR < 20\""
+            },
+
+            // --- Section 2: Congestive Heart Failure Treatment III (Diuretics) ---
+            {
+                section: "Congestive Heart Failure Treatment III (Diuretics)",
+                maskedLO: "LO1: Describe the major classes of CHF diuretic drugs by the [mechanism of action].",
+                fullLO: "LO1: Describe the major classes of CHF diuretic drugs by the mechanism of action",
+                question: "Which of the following diuretics acts by inhibiting the Na+/K+/2Cl- cotransporter in the thick ascending limb of the Loop of Henle?",
+                options: {
+                    A: "Acetazolamide",
+                    B: "Furosemide",
+                    C: "Hydrochlorothiazide",
+                    D: "Mannitol",
+                    E: "Spironolactone"
+                },
+                correctAnswer: "B",
+                rationale: "Furosemide is a Loop Diuretic that inhibits the Na+/K+/2Cl- cotransporter in the ascending loop of Henle.",
+                source: "Winston, CHF_Diuretic_Agents.pdf, Slide 12: \"Loop Diuretics... Furosemide (Lasix)... Inhibit Na+/K+/2Cl- cotransporter in ascending loop of Henle\""
+            },
+            {
+                section: "Congestive Heart Failure Treatment III (Diuretics)",
+                maskedLO: "LO1: Describe the major classes of CHF diuretic drugs by the [mechanism of action].",
+                fullLO: "LO1: Describe the major classes of CHF diuretic drugs by the mechanism of action",
+                question: "Spironolactone functions as a diuretic by blocking which receptor in the cortical collecting duct?",
+                options: {
+                    A: "Adenosine A1 receptor",
+                    B: "Aldosterone receptor",
+                    C: "Angiotensin II type 1 receptor",
+                    D: "Vasopressin V2 receptor",
+                    E: "Beta-adrenergic receptor"
+                },
+                correctAnswer: "B",
+                rationale: "Spironolactone is an aldosterone receptor antagonist. It blocks aldosterone receptors to promote Na+ excretion and K+ retention.",
+                source: "Winston, CHF_Diuretic_Agents.pdf, Slide 10 & 11: \"Aldosterone receptor antagonists... Spironolactone... Block aldosterone receptors\""
+            },
+            {
+                section: "Congestive Heart Failure Treatment III (Diuretics)",
+                maskedLO: "LO2: Contrast how the major classes of diuretics influence [urine characteristics].",
+                fullLO: "LO2: Contrast how the major classes of diuretics influence urine volume and composition",
+                question: "Loop diuretics abolish the transepithelial potential difference in the thick ascending limb. This specific action leads to the increased urinary excretion of which of the following ions?",
+                options: {
+                    A: "Bicarbonate",
+                    B: "Calcium and Magnesium",
+                    C: "Glucose",
+                    D: "Phosphate",
+                    E: "Uric acid"
+                },
+                correctAnswer: "B",
+                rationale: "Loop diuretics abolish the transepithelial potential difference, causing increased Ca2+ and Mg2+ excretion.",
+                source: "Winston, CHF_Diuretic_Agents.pdf, Slide 5: \"Abolish transepithelial potential difference causing increased Ca2+ and Mg2+ excretion\""
+            },
+            {
+                section: "Congestive Heart Failure Treatment III (Diuretics)",
+                maskedLO: "LO2: Contrast how the major classes of diuretics influence [urine characteristics].",
+                fullLO: "LO2: Contrast how the major classes of diuretics influence urine volume and composition",
+                question: "Acetazolamide, a carbonic anhydrase inhibitor, causes diuresis by inhibiting the reabsorption of sodium bicarbonate. This mechanism leads to which of the following changes in urine composition?",
+                options: {
+                    A: "Acidification of the urine",
+                    B: "Decreased phosphate excretion",
+                    C: "Increased urinary pH (alkalization)",
+                    D: "Massive potassium retention",
+                    E: "No change in urine pH"
+                },
+                correctAnswer: "C",
+                rationale: "Carbonic anhydrase inhibitors increase urinary HCO3- excretion, which increases urinary pH to ~8 (urinary alkalization).",
+                source: "Winston, CHF_Diuretic_Agents.pdf, Slide 18 & 20: \"Increased urinary HCO3- excretion... Increased in urinary pH to ~8\""
+            },
+            {
+                section: "Congestive Heart Failure Treatment III (Diuretics)",
+                maskedLO: "LO3: State major uses of each diuretic class and describe why that particular class is preferred",
+                fullLO: "LO3: State major uses of each diuretic class and describe why that particular class is preferred",
+                question: "A patient presents with acute pulmonary edema. Which diuretic class is preferred for rapid relief of fluid retention and congestion due to its high potency?",
+                options: {
+                    A: "Carbonic anhydrase inhibitors",
+                    B: "Loop diuretics",
+                    C: "Osmotic diuretics",
+                    D: "Potassium-sparing diuretics",
+                    E: "Thiazide diuretics"
+                },
+                correctAnswer: "B",
+                rationale: "Loop diuretics are indicated for acute pulmonary edema and relieve fluid retention/congestion. They are known as \"high ceiling diuretics\" due to their potency (inhibiting ~25% of filtered Na+ load).",
+                source: "Winston, CHF_Diuretic_Agents.pdf, Slide 6 & 7: \"Loop diuretics... Clinical indications: Acute pulmonary edema... Known as 'high ceiling diuretics'\""
+            },
+            {
+                section: "Congestive Heart Failure Treatment III (Diuretics)",
+                maskedLO: "LO3: State major uses of each diuretic class and describe why that particular class is preferred",
+                fullLO: "LO3: State major uses of each diuretic class and describe why that particular class is preferred",
+                question: "In a patient with hepatic cirrhosis and ascites, which diuretic is considered the drug of choice, often used in combination with furosemide?",
+                options: {
+                    A: "Acetazolamide",
+                    B: "Bumetanide",
+                    C: "Mannitol",
+                    D: "Metolazone",
+                    E: "Spironolactone"
+                },
+                correctAnswer: "E",
+                rationale: "Spironolactone is considered the diuretic of choice in patients with hepatic cirrhosis.",
+                source: "Winston, CHF_Diuretic_Agents.pdf, Slide 13: \"Spironolactone is considered the diuretic of choice in patients with hepatic cirrhosis\""
+            },
+            {
+                section: "Congestive Heart Failure Treatment III (Diuretics)",
+                maskedLO: "LO4: Describe major side effects/limitations of each class",
+                fullLO: "LO4: Describe major side effects/limitations of each class",
+                question: "A patient receiving high-dose intravenous furosemide complains of ringing in the ears and hearing loss. This adverse effect is known as:",
+                options: {
+                    A: "Gynecomastia",
+                    B: "Hyperkalemia",
+                    C: "Nephrolithiasis",
+                    D: "Ototoxicity",
+                    E: "Rhabdomyolysis"
+                },
+                correctAnswer: "D",
+                rationale: "Ototoxicity is a side effect of loop diuretics.",
+                source: "Winston, CHF_Diuretic_Agents.pdf, Slide 8: \"Loop diuretics toxicity...ototoxicity\""
+            },
+            {
+                section: "Congestive Heart Failure Treatment III (Diuretics)",
+                maskedLO: "LO4: Describe major side effects/limitations of each class",
+                fullLO: "LO4: Describe major side effects/limitations of each class",
+                question: "A patient taking an aldosterone antagonist for heart failure presents with muscle weakness and palpitations. Laboratory analysis reveals a potassium level of 6.2 mEq/L. This hyperkalemia is a major concern associated with:",
+                options: {
+                    A: "Acetazolamide",
+                    B: "Furosemide",
+                    C: "Hydrochlorothiazide",
+                    D: "Mannitol",
+                    E: "Spironolactone"
+                },
+                correctAnswer: "E",
+                rationale: "Hyperkalemia is a major toxicity concern with potassium-sparing diuretics like spironolactone.",
+                source: "Winston, CHF_Diuretic_Agents.pdf, Slide 14: \"Potassium-sparing diuretics... Toxicity: Hyperkalemia\""
+            },
+            {
+                section: "Congestive Heart Failure Treatment III (Diuretics)",
+                maskedLO: "LO5: Given a clinical scenario, determine the appropriate drug to prescribe for treatment",
+                fullLO: "LO5: Given a clinical scenario, determine the appropriate drug to prescribe for treatment",
+                question: "A 67-year-old woman presents with acute volume overload and symptoms of heart failure. Her physician decides to prescribe a diuretic that acts on the ascending loop of Henle to provide potent diuresis. Which drug is most appropriate?",
+                options: {
+                    A: "Amiloride",
+                    B: "Chlorthalidone",
+                    C: "Hydrochlorothiazide",
+                    D: "Spironolactone",
+                    E: "Torsemide"
+                },
+                correctAnswer: "E",
+                rationale: "Torsemide is a loop diuretic (like furosemide/bumetanide) acting on the loop of Henle. The others are potassium-sparing or thiazide-like.",
+                source: "Winston, CHF_Diuretic_Agents.pdf, Slide 4 & 12: \"Loop diuretics... Torsemide (Demadex)\""
+            },
+            {
+                section: "Congestive Heart Failure Treatment III (Diuretics)",
+                maskedLO: "LO5: Given a clinical scenario, determine the appropriate drug to prescribe for treatment",
+                fullLO: "LO5: Given a clinical scenario, determine the appropriate drug to prescribe for treatment",
+                question: "A patient with glaucoma presents for treatment to reduce intraocular pressure. Which diuretic agent is indicated for this condition?",
+                options: {
+                    A: "Acetazolamide",
+                    B: "Bumetanide",
+                    C: "Eplerenone",
+                    D: "Furosemide",
+                    E: "Triamterene"
+                },
+                correctAnswer: "A",
+                rationale: "Carbonic anhydrase inhibitors like Acetazolamide are indicated for glaucoma to control intraocular pressure.",
+                source: "Winston, CHF_Diuretic_Agents.pdf, Slide 20: \"Carbonic anhydrase inhibitors... Clinical indications: Glaucoma\""
+            },
+
+            // --- Section 3: Antianginals ---
+            {
+                section: "Antianginals",
+                maskedLO: "LO1: Recognize the underlying mechanisms for the 3 major types of angina pectoris",
+                fullLO: "LO1: Recognize the underlying mechanisms for the 3 major types of angina pectoris",
+                question: "Which type of angina is characterized by a fixed coronary stenosis and chest pain that is triggered by physical exertion?",
+                options: {
+                    A: "Microvascular angina",
+                    B: "Prinzmetal's angina",
+                    C: "Stable angina",
+                    D: "Unstable angina",
+                    E: "Vasospastic angina"
+                },
+                correctAnswer: "C",
+                rationale: "Stable angina is caused by fixed coronary stenosis and is exertional.",
+                source: "Winston, Antianginal_Medications.pdf, Slide 3: \"Stable Angina: Fixed coronary stenosis, exertional\""
+            },
+            {
+                section: "Antianginals",
+                maskedLO: "LO1: Recognize the underlying mechanisms for the 3 major types of angina pectoris",
+                fullLO: "LO1: Recognize the underlying mechanisms for the 3 major types of angina pectoris",
+                question: "A patient experiences chest pain at rest that is associated with transient ST-segment elevation. Angiography reveals no fixed stenosis but provocative testing induces coronary artery spasm. This pathophysiology describes:",
+                options: {
+                    A: "NSTEMI",
+                    B: "Prinzmetal’s (Vasospastic) Angina",
+                    C: "Stable Angina",
+                    D: "STEMI",
+                    E: "Unstable Angina"
+                },
+                correctAnswer: "B",
+                rationale: "Prinzmetal's/Vasospastic angina is caused by coronary vasospasm.",
+                source: "Winston, Antianginal_Medications.pdf, Slide 3: \"Prinzmetal’s/Vasospastic: Coronary vasospasm\""
+            },
+            {
+                section: "Antianginals",
+                maskedLO: "LO2: List the drugs of choice for treating the major types of angina pectoris",
+                fullLO: "LO2: List the drugs of choice for treating the major types of angina pectoris",
+                question: "For a patient with stable angina and no contraindications, which class of medication is considered the first-line therapy for symptom relief?",
+                options: {
+                    A: "Beta-blockers",
+                    B: "Calcium channel blockers",
+                    C: "Long-acting nitrates",
+                    D: "Ranolazine",
+                    E: "Short-acting nitrates alone"
+                },
+                correctAnswer: "A",
+                rationale: "Beta-blockers are the first-line therapy for symptom relief in stable angina.",
+                source: "Winston, Antianginal_Medications.pdf, Slide 11 & 18: \"First-line therapy symptom relief in stable angina\""
+            },
+            {
+                section: "Antianginals",
+                maskedLO: "LO2: List the drugs of choice for treating the major types of angina pectoris",
+                fullLO: "LO2: List the drugs of choice for treating the major types of angina pectoris",
+                question: "Which class of drugs is the treatment of choice for Prinzmetal's (vasospastic) angina, particularly for preventing coronary vasospasm?",
+                options: {
+                    A: "Beta-blockers",
+                    B: "Calcium Channel Blockers (CCBs)",
+                    C: "Funny current inhibitors",
+                    D: "Late sodium current inhibitors",
+                    E: "Potassium channel openers"
+                },
+                correctAnswer: "B",
+                rationale: "Calcium Channel Blockers are the drug of choice for Prinzmetal's angina because they prevent coronary vasospasm.",
+                source: "Winston, Antianginal_Medications.pdf, Slide 14 & 18: \"Drug of choice for Prinzmetal's angina... especially dihydropyridines (coronary vasospasm)\""
+            },
+            {
+                section: "Antianginals",
+                maskedLO: "LO3: Recognize the different characteristics and therapies of stable, vasospastic and unstable angina",
+                fullLO: "LO3: Recognize the different characteristics and therapies of stable, vasospastic and unstable angina",
+                question: "Unstable angina differs from stable angina in that unstable angina:",
+                options: {
+                    A: "Is caused by a fixed coronary stenosis.",
+                    B: "Is predictable and reproducible with exertion.",
+                    C: "Is relieved immediately by rest.",
+                    D: "Occurs usually at rest and is unpredictable.",
+                    E: "Represents a mismatch of supply and demand without plaque change."
+                },
+                correctAnswer: "D",
+                rationale: "Unstable angina involves plaque rupture/thrombus, is unpredictable, can occur at any time, and usually occurs at rest.",
+                source: "Winston, Antianginal_Medications.pdf, Slide 3: \"Unstable Angina: Plaque rupture, thrombus, unpredictable... usually occurs at rest\""
+            },
+            {
+                section: "Antianginals",
+                maskedLO: "LO3: Recognize the different characteristics and therapies of stable, vasospastic and unstable angina",
+                fullLO: "LO3: Recognize the different characteristics and therapies of stable, vasospastic and unstable angina",
+                question: "In the treatment of vasospastic (Prinzmetal's) angina, which class of medication should be avoided because it may leave alpha-mediated vasoconstriction unopposed, potentially worsening the spasm?",
+                options: {
+                    A: "ACE Inhibitors",
+                    B: "Calcium Channel Blockers",
+                    C: "Nitrates",
+                    D: "Non-selective Beta-blockers",
+                    E: "Statins"
+                },
+                correctAnswer: "D",
+                rationale: "Avoid nonselective beta blockers in vasospastic angina because beta-mediated vasodilation blockade leads to unopposed alpha constriction.",
+                source: "Winston, Antianginal_Medications.pdf, Slide 11: \"Avoid nonselective beta blockers in vasospastic angina (β-mediated vasodilation -> unopposed alpha constriction)\""
+            },
+            {
+                section: "Antianginals",
+                maskedLO: "LO4: Apply the most appropriate therapy based on the [mechanisms and side effects].",
+                fullLO: "LO4: Apply the most appropriate therapy based on the mechanisms of action of antianginal drugs and side effects",
+                question: "A patient taking a phosphodiesterase-5 (PDE5) inhibitor for erectile dysfunction presents with chest pain. Nitroglycerin is contraindicated in this patient because the combination can precipitate:",
+                options: {
+                    A: "Hypertensive crisis",
+                    B: "Life-threatening hypotension",
+                    C: "Malignant hyperthermia",
+                    D: "Severe bradycardia",
+                    E: "Torsades de pointes"
+                },
+                correctAnswer: "B",
+                rationale: "PDE5 inhibitors are contraindicated with nitrates due to the risk of life-threatening hypotension.",
+                source: "Winston, Antianginal_Medications.pdf, Slide 8: \"CONTRAINDICATIONS: PDE5 inhibitors... life-threatening hypotension\""
+            },
+            {
+                section: "Antianginals",
+                maskedLO: "LO4: Apply the most appropriate therapy based on the [mechanisms and side effects].",
+                fullLO: "LO4: Apply the most appropriate therapy based on the mechanisms of action of antianginal drugs and side effects",
+                question: "A patient with refractory angina is considered for Ranolazine therapy. The physician reviews the patient's ECG before starting the drug. Ranolazine is contraindicated or requires caution if the patient has a history of:",
+                options: {
+                    A: "Atrial fibrillation",
+                    B: "Left bundle branch block",
+                    C: "Prolonged QT interval",
+                    D: "Short PR interval",
+                    E: "Sinus tachycardia"
+                },
+                correctAnswer: "C",
+                rationale: "Ranolazine causes QT prolongation (dose-dependent) and is contraindicated with prolonged QT or QT-prolonging drugs.",
+                source: "Winston, Antianginal_Medications.pdf, Slide 16: \"Serious Side Effects... QT prolongation... CONTRAINDICATIONS: Prolonged QT\""
+            },
+            {
+                section: "Antianginals",
+                maskedLO: "LO5: Describe how antianginal drugs are metabolized and eliminated from the body",
+                fullLO: "LO5: Describe how antianginal drugs are metabolized and eliminated from the body",
+                question: "Sublingual nitroglycerin is the preferred formulation for acute angina attacks. This route of administration is advantageous because it:",
+                options: {
+                    A: "Avoids first-pass metabolism",
+                    B: "Has a long duration of action (10 hours)",
+                    C: "Increases renal elimination",
+                    D: "Prevents nitrate tolerance",
+                    E: "Requires metabolic activation by the liver"
+                },
+                correctAnswer: "A",
+                rationale: "Short-acting nitroglycerin (sublingual) avoids first-pass metabolism.",
+                source: "Winston, Antianginal_Medications.pdf, Slide 6: \"Short-acting... Nitroglycerin sublingual... Avoids first-pass metabolism\""
+            },
+            {
+                section: "Antianginals",
+                maskedLO: "LO5: Describe how antianginal drugs are metabolized and eliminated from the body",
+                fullLO: "LO5: Describe how antianginal drugs are metabolized and eliminated from the body",
+                question: "Ranolazine is metabolized by the cytochrome P450 system. Which of the following drug interactions is a contraindication for Ranolazine use due to its metabolism by CYP3A4?",
+                options: {
+                    A: "Concurrent use with loop diuretics",
+                    B: "Concurrent use with strong CYP3A4 inducers",
+                    C: "Concurrent use with potassium supplements",
+                    D: "Concurrent use with aspirin",
+                    E: "Concurrent use with ACE inhibitors"
+                },
+                correctAnswer: "B",
+                rationale: "Ranolazine is contraindicated with strong CYP3A4 inducers (e.g., rifampin) because they significantly reduce ranolazine concentrations.",
+                source: "Winston, Antianginal_Medications.pdf, Slide 16: \"CYP3A4 interactions – CI with strong CYP3A4 inducers\""
+            }
+        ];
+
+        // --- Core Logic ---
+        const quizRoot = document.getElementById('quiz-root');
+        const themeSelect = document.getElementById('theme-select');
+        const pinBtn = document.getElementById('pin-btn');
+        const mainHeader = document.getElementById('main-header');
+
+        function initQuiz() {
+            // Render Questions
+            let currentSection = "";
+            
+            quizData.forEach((item, index) => {
+                // Insert Section Header if needed
+                if (item.section !== currentSection) {
+                    currentSection = item.section;
+                    const sectionHeader = document.createElement('h2');
+                    sectionHeader.className = 'section-header';
+                    sectionHeader.textContent = currentSection;
+                    quizRoot.appendChild(sectionHeader);
+                }
+
+                // Create Card
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `q-card-${index}`;
+
+                // Learning Objective (Masked)
+                const loBox = document.createElement('div');
+                loBox.className = 'lo-box';
+                loBox.id = `lo-${index}`;
+                loBox.textContent = item.maskedLO;
+                card.appendChild(loBox);
+
+                // Question Text
+                const qText = document.createElement('div');
+                qText.className = 'question-text';
+                qText.textContent = `${index + 1}. ${item.question}`;
+                card.appendChild(qText);
+
+                // Options Container
+                const optionsGrid = document.createElement('div');
+                optionsGrid.className = 'options-grid';
+
+                for (const [key, value] of Object.entries(item.options)) {
+                    const label = document.createElement('label');
+                    label.className = 'option-label';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `question-${index}`;
+                    input.value = key;
+
+                    const span = document.createElement('span');
+                    span.textContent = `${key}. ${value}`;
+
+                    label.appendChild(input);
+                    label.appendChild(span);
+                    optionsGrid.appendChild(label);
+                }
+                card.appendChild(optionsGrid);
+
+                // Check Button
+                const btn = document.createElement('button');
+                btn.className = 'btn-check';
+                btn.textContent = 'Check Answer';
+                btn.onclick = () => checkAnswer(index);
+                card.appendChild(btn);
+
+                // Feedback Container
+                const feedback = document.createElement('div');
+                feedback.className = 'feedback';
+                feedback.id = `feedback-${index}`;
+                card.appendChild(feedback);
+
+                quizRoot.appendChild(card);
+            });
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('quizTheme') || 'dark';
+            changeTheme(savedTheme);
+            themeSelect.value = savedTheme;
+
+            // Load saved pin state
+            const savedPinState = localStorage.getItem('headerPinned');
+            // Default to true (pinned) if not set or if set to true
+            if (savedPinState === 'false') {
+                toggleHeader(false); 
+            } else {
+                toggleHeader(true);
+            }
+        }
+
+        function checkAnswer(index) {
+            const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+            const feedbackEl = document.getElementById(`feedback-${index}`);
+            const loEl = document.getElementById(`lo-${index}`);
+            const data = quizData[index];
+
+            if (!selected) {
+                alert("Please select an answer.");
+                return;
+            }
+
+            // Reveal LO
+            loEl.textContent = data.fullLO;
+
+            // Generate Feedback HTML
+            const isCorrect = selected.value === data.correctAnswer;
+            
+            let html = `<span class="feedback-header">${isCorrect ? "Correct!" : "Incorrect"}</span>`;
+            if (!isCorrect) {
+                html += `<div>The correct answer is <strong>${data.correctAnswer}</strong>.</div>`;
+            }
+            
+            html += `<div class="rationale"><strong>Rationale:</strong> ${data.rationale}</div>`;
+            html += `<div class="source"><strong>Source:</strong> ${data.source}</div>`;
+
+            feedbackEl.innerHTML = html;
+            feedbackEl.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedbackEl.style.display = 'block';
+        }
+
+        function changeTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('quizTheme', themeName);
+        }
+
+        function toggleHeader(forceState) {
+            // Determine current state based on class presence
+            const isCurrentlyPinned = !mainHeader.classList.contains('unpinned');
+            
+            // If forceState is provided (boolean), use it. Otherwise toggle current state.
+            const newState = (typeof forceState === 'boolean') ? forceState : !isCurrentlyPinned;
+
+            if (newState) {
+                // Pin
+                mainHeader.classList.remove('unpinned');
+                pinBtn.classList.add('pin-active');
+                localStorage.setItem('headerPinned', 'true');
+            } else {
+                // Unpin
+                mainHeader.classList.add('unpinned');
+                pinBtn.classList.remove('pin-active');
+                localStorage.setItem('headerPinned', 'false');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initQuiz);
+
+    </script>
+</body>
+</html>
